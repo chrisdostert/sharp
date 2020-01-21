@@ -115,15 +115,12 @@
           }],
           ['OS == "mac"', {
             'libraries': [
-              'libvips-cpp.42.dylib',
-              'libvips.42.dylib',
-              'libglib-2.0.0.dylib',
-              'libgobject-2.0.0.dylib',
-            ],
-            'library_dirs': ['<(sharp_vendor_dir)/lib'],
-            'ldflags': [
+              '<(sharp_vendor_dir)/lib/libvips-cpp.42.dylib',
+              '<(sharp_vendor_dir)/lib/libvips.42.dylib',
+              '<(sharp_vendor_dir)/lib/libglib-2.0.0.dylib',
+              '<(sharp_vendor_dir)/lib/libgobject-2.0.0.dylib',
               # Ensure runtime linking is relative to sharp.node
-              '-rpath \'../../vendor/<(vips_version)/lib\''
+              '-rpath \'@loader_path/../../vendor/<(vips_version)/lib\''
             ]
           }],
           ['OS == "linux"', {
@@ -165,12 +162,10 @@
               '-lwebpmux',
               '-lxml2',
               '-lz',
-            ],
-            'library_dirs': ['<(sharp_vendor_dir)/lib'],
-            'ldflags': [
               # Ensure runtime linking is relative to sharp.node
-              '-Wl,--disable-new-dtags -Wl,-rpath=\'../../vendor/<(vips_version)/lib\''
-            ]
+              '-Wl,--disable-new-dtags -Wl,-rpath=\'$$ORIGIN/../../vendor/<(vips_version)/lib\''
+            ],
+            'library_dirs': ['<(sharp_vendor_dir)/lib']
           }]
         ]
       }]
