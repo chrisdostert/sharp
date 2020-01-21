@@ -25,9 +25,9 @@
           '<(sharp_vendor_dir)/lib/glib-2.0/include'
         ],
         'libraries': [
-          'vips',
-          'glib-2.0',
-          'gobject-2.0'
+          'libvips',
+          'libglib-2.0',
+          'libgobject-2.0'
         ],
         'library_dirs': ['<(sharp_vendor_dir)/lib'],
         'configurations': {
@@ -107,9 +107,9 @@
               '_FILE_OFFSET_BITS=64'
             ],
             'libraries': [
-              'vips',
-              'glib-2.0',
-              'gobject-2.0'
+              'libvips',
+              'libglib-2.0',
+              'libgobject-2.0'
             ],
             'library_dirs': ['<(sharp_vendor_dir)/lib']
           }],
@@ -163,7 +163,7 @@
               '-lxml2',
               '-lz',
               # Ensure runtime linking is relative to sharp.node
-              '-Wl,--disable-new-dtags -Wl,-rpath=\'$${ORIGIN}/../../vendor/<(vips_version)/lib\''
+              '-Wl,--disable-new-dtags -Wl,-rpath=\'$$ORIGIN/../../vendor/<(vips_version)/lib\''
             ],
             'library_dirs': ['<(sharp_vendor_dir)/lib']
           }]
