@@ -25,9 +25,9 @@
           '<(sharp_vendor_dir)/lib/glib-2.0/include'
         ],
         'libraries': [
-          'libvips',
-          'libglib-2.0',
-          'libgobject-2.0'
+          'libvips.lib',
+          'libglib-2.0.lib',
+          'libgobject-2.0.lib'
         ],
         'library_dirs': ['<(sharp_vendor_dir)/lib'],
         'configurations': {
@@ -107,9 +107,9 @@
               '_FILE_OFFSET_BITS=64'
             ],
             'libraries': [
-              'libvips',
-              'libglib-2.0',
-              'libgobject-2.0'
+              'libvips.lib',
+              'libglib-2.0.lib',
+              'libgobject-2.0.lib'
             ],
             'library_dirs': ['<(sharp_vendor_dir)/lib']
           }],
