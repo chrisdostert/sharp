@@ -121,10 +121,12 @@
               'libgobject-2.0.0.dylib'
             ],
             'library_dirs': ['<(sharp_vendor_dir)/lib'],
-            'ldflags': [
-              # Ensure runtime linking is relative to sharp.node
-              '-rpath \'@loader_path/../../vendor/<(vips_version)/lib\''
-            ]
+            'xcode_settings': {
+              'OTHER_LDFLAGS': [
+                # Ensure runtime linking is relative to sharp.node
+                '-Wl,-rpath,\'@loader_path/../../vendor/<(vips_version)/lib\'
+              ]
+            }
           }],
           ['OS == "linux"', {
             'defines': [
