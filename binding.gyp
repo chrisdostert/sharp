@@ -1,4 +1,8 @@
 {
+  'variables': {
+    'vips_version': '8.9.0',
+    'sharp_vendor_dir': '<(module_root_dir)/vendor/<@(vips_version)'
+  },
   'targets': [{
     'target_name': 'libvips-cpp',
     'conditions': [
@@ -16,15 +20,16 @@
           'src/libvips/cplusplus/VImage.cpp'
         ],
         'include_dirs': [
-          'vendor/include',
-          'vendor/include/glib-2.0',
-          'vendor/lib/glib-2.0/include'
+          '<(sharp_vendor_dir)/include',
+          '<(sharp_vendor_dir)/include/glib-2.0',
+          '<(sharp_vendor_dir)/lib/glib-2.0/include'
         ],
         'libraries': [
-          '../vendor/lib/libvips.lib',
-          '../vendor/lib/libglib-2.0.lib',
-          '../vendor/lib/libgobject-2.0.lib'
+          'vips',
+          'glib-2.0',
+          'gobject-2.0'
         ],
+        'library_dirs': ['<(sharp_vendor_dir)/lib'],
         'configurations': {
           'Release': {
             'msvs_settings': {
@@ -91,9 +96,9 @@
       }, {
         # Use pre-built libvips stored locally within node_modules
         'include_dirs': [
-          'vendor/include',
-          'vendor/include/glib-2.0',
-          'vendor/lib/glib-2.0/include'
+          '<(sharp_vendor_dir)/include',
+          '<(sharp_vendor_dir)/include/glib-2.0',
+          '<(sharp_vendor_dir)/lib/glib-2.0/include'
         ],
         'conditions': [
           ['OS == "win"', {
@@ -102,19 +107,20 @@
               '_FILE_OFFSET_BITS=64'
             ],
             'libraries': [
-              '../vendor/lib/libvips.lib',
-              '../vendor/lib/libglib-2.0.lib',
-              '../vendor/lib/libgobject-2.0.lib'
-            ]
+              'vips',
+              'glib-2.0',
+              'gobject-2.0'
+            ],
+            'library_dirs': ['<(sharp_vendor_dir)/lib']
           }],
           ['OS == "mac"', {
             'libraries': [
-              '../vendor/lib/libvips-cpp.42.dylib',
-              '../vendor/lib/libvips.42.dylib',
-              '../vendor/lib/libglib-2.0.0.dylib',
-              '../vendor/lib/libgobject-2.0.0.dylib',
+              '<(sharp_vendor_dir)/lib/libvips-cpp.42.dylib',
+              '<(sharp_vendor_dir)/lib/libvips.42.dylib',
+              '<(sharp_vendor_dir)/lib/libglib-2.0.0.dylib',
+              '<(sharp_vendor_dir)/lib/libgobject-2.0.0.dylib',
               # Ensure runtime linking is relative to sharp.node
-              '-rpath \'@loader_path/../../vendor/lib\''
+              '-rpath \'@loader_path/../../vendor/<(vips_version)/lib\''
             ]
           }],
           ['OS == "linux"', {
@@ -122,43 +128,44 @@
               '_GLIBCXX_USE_CXX11_ABI=0'
             ],
             'libraries': [
-              '../vendor/lib/libvips-cpp.so',
-              '../vendor/lib/libvips.so',
-              '../vendor/lib/libglib-2.0.so',
-              '../vendor/lib/libgobject-2.0.so',
+              '-lvips-cpp',
+              '-lvips',
+              '-lglib-2.0',
+              '-lgobject-2.0',
               # Dependencies of dependencies, included for openSUSE support
-              '../vendor/lib/libcairo.so',
-              '../vendor/lib/libexif.so',
-              '../vendor/lib/libexpat.so',
-              '../vendor/lib/libffi.so',
-              '../vendor/lib/libfontconfig.so',
-              '../vendor/lib/libfreetype.so',
-              '../vendor/lib/libfribidi.so',
-              '../vendor/lib/libgdk_pixbuf-2.0.so',
-              '../vendor/lib/libgif.so',
-              '../vendor/lib/libgio-2.0.so',
-              '../vendor/lib/libgmodule-2.0.so',
-              '../vendor/lib/libgsf-1.so',
-              '../vendor/lib/libgthread-2.0.so',
-              '../vendor/lib/libharfbuzz.so',
-              '../vendor/lib/libjpeg.so',
-              '../vendor/lib/liblcms2.so',
-              '../vendor/lib/liborc-0.4.so',
-              '../vendor/lib/libpango-1.0.so',
-              '../vendor/lib/libpangocairo-1.0.so',
-              '../vendor/lib/libpangoft2-1.0.so',
-              '../vendor/lib/libpixman-1.so',
-              '../vendor/lib/libpng.so',
-              '../vendor/lib/librsvg-2.so',
-              '../vendor/lib/libtiff.so',
-              '../vendor/lib/libwebp.so',
-              '../vendor/lib/libwebpdemux.so',
-              '../vendor/lib/libwebpmux.so',
-              '../vendor/lib/libxml2.so',
-              '../vendor/lib/libz.so',
+              '-lcairo',
+              '-lexif',
+              '-lexpat',
+              '-lffi',
+              '-lfontconfig',
+              '-lfreetype',
+              '-lfribidi',
+              '-lgdk_pixbuf-2.0',
+              '-lgif',
+              '-lgio-2.0',
+              '-lgmodule-2.0',
+              '-lgsf-1',
+              '-lgthread-2.0',
+              '-lharfbuzz',
+              '-ljpeg',
+              '-llcms2',
+              '-lorc-0.4',
+              '-lpango-1.0',
+              '-lpangocairo-1.0',
+              '-lpangoft2-1.0',
+              '-lpixman-1',
+              '-lpng',
+              '-lrsvg-2',
+              '-ltiff',
+              '-lwebp',
+              '-lwebpdemux',
+              '-lwebpmux',
+              '-lxml2',
+              '-lz',
               # Ensure runtime linking is relative to sharp.node
-              '-Wl,--disable-new-dtags -Wl,-rpath=\'$${ORIGIN}/../../vendor/lib\''
-            ]
+              '-Wl,--disable-new-dtags -Wl,-rpath=\'$${ORIGIN}/../../vendor/<(vips_version)/lib\''
+            ],
+            'library_dirs': ['<(sharp_vendor_dir)/lib']
           }]
         ]
       }]

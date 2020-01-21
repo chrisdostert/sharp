@@ -6,6 +6,8 @@ const path = require('path');
 const libvips = require('../lib/libvips');
 const npmLog = require('npmlog');
 
+const minimumLibvipsVersion = libvips.minimumLibvipsVersion;
+
 if (process.platform === 'win32') {
   const buildDir = path.join(__dirname, '..', 'build');
   const buildReleaseDir = path.join(buildDir, 'Release');
@@ -14,7 +16,7 @@ if (process.platform === 'win32') {
     libvips.mkdirSync(buildDir);
     libvips.mkdirSync(buildReleaseDir);
   } catch (err) {}
-  const vendorLibDir = path.join(__dirname, '..', 'vendor', 'lib');
+  const vendorLibDir = path.join(__dirname, '..', 'vendor', minimumLibvipsVersion, 'lib');
   npmLog.info('sharp', `Copying DLLs from ${vendorLibDir} to ${buildReleaseDir}`);
   try {
     fs

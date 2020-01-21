@@ -71,5 +71,11 @@ matrix:
       osx_image: xcode10.1
       language: node_js
       node_js: "13"
+      script: 
+        # inspect library
+        - otool -l $TRAVIS_BUILD_DIR/build/Release/sharp.node
+        # inspect library dependencies
+        - otool -L $TRAVIS_BUILD_DIR/build/Release/sharp.node
+        - npm test
 cache:
   npm: false
