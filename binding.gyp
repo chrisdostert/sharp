@@ -171,7 +171,7 @@
             'library_dirs': ['<(sharp_vendor_dir)/lib'],
             'ldflags': [
               # Ensure runtime linking is relative to sharp.node
-              '-Wl,--disable-new-dtags -Wl,-rpath=\'$$ORIGIN/../../vendor\''
+              '-Wl,--disable-new-dtags -Wl,-rpath=\'$$ORIGIN/../../vendor/<(vips_version)/lib\''
             ]
           }]
         ]
