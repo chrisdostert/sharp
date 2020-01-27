@@ -124,7 +124,7 @@
             'xcode_settings': {
               'OTHER_LDFLAGS': [
                 # Ensure runtime linking is relative to sharp.node
-                '-Wl,-rpath,\'@loader_path/../../vendor/<(vips_version)/lib\''
+                '-Wl,-rpath,\'@loader_path/../../vendor\''
               ]
             }
           }],
@@ -171,7 +171,7 @@
             'library_dirs': ['<(sharp_vendor_dir)/lib'],
             'ldflags': [
               # Ensure runtime linking is relative to sharp.node
-              '-Wl,--disable-new-dtags -Wl,-rpath=\'$$ORIGIN/../../vendor/<(vips_version)/lib\''
+              '-Wl,--disable-new-dtags -Wl,-rpath=\'$$ORIGIN/../../vendor\''
             ]
           }]
         ]
