@@ -133,8 +133,8 @@
               '_GLIBCXX_USE_CXX11_ABI=0'
             ],
             'libraries': [
-              '-l:libvips-cpp.so.42',
-              '-l:libvips.so.42',
+              '-l:libvips-cpp.so.52',
+              '-l:libvips.so.52',
               '-l:libglib-2.0.so.0',
               '-l:libgobject-2.0.so.0',
               # Dependencies of dependencies, included for openSUSE support

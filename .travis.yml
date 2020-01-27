@@ -18,6 +18,8 @@ matrix:
       script: 
         # inspect RPATH
         - readelf -d $TRAVIS_BUILD_DIR/build/Release/sharp.node | grep RPATH
+        # inspect dependencies
+        - ldd $TRAVIS_BUILD_DIR/build/Release/sharp.node | grep vendor | cut -d '=' -f1 | awk '{print $1}'
         - npm test
       after_success:
         - npm install coveralls
@@ -76,9 +78,9 @@ matrix:
       language: node_js
       node_js: "13"
       script: 
-        # inspect binary
-        - otool -l $TRAVIS_BUILD_DIR/build/Release/sharp.node
-        # inspect dependencies of binary
+        # inspect LC_RPATH
+        - otool -l $TRAVIS_BUILD_DIR/build/Release/sharp.node | grep loader_path
+        # inspect dependencies
         - otool -L $TRAVIS_BUILD_DIR/build/Release/sharp.node
         - npm test
 cache:
