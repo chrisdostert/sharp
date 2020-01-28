@@ -150,7 +150,6 @@
               '-l:libgio-2.0.so.0',
               '-l:libgmodule-2.0.so.0',
               '-l:libgsf-1.so.114',
-              '-l:libgthread-2.0.so.0',
               '-l:libharfbuzz.so.0',
               '-l:libjpeg.so.8',
               '-l:liblcms2.so.2',
