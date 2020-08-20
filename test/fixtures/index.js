@@ -90,6 +90,7 @@ module.exports = {
   inputPngEmbed: getPath('embedgravitybird.png'), // Released to sharp under a CC BY 4.0
   inputPngRGBWithAlpha: getPath('2569067123_aca715a2ee_o.png'), // http://www.flickr.com/photos/grizdave/2569067123/ (same as inputJpg)
   inputPngImageInAlpha: getPath('image-in-alpha.png'), // https://github.com/lovell/sharp/issues/1597
+  inputPngBench: getPath('medium_rgb8.png'), // https://github.com/libspng/benchmark_images/blob/master/medium_rgb8.png
 
   inputWebP: getPath('4.webp'), // http://www.gstatic.com/webp/gallery/4.webp
   inputWebPWithTransparency: getPath('5_webp_a.webp'), // http://www.gstatic.com/webp/gallery3/5_webp_a.webp

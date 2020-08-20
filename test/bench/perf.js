@@ -564,7 +564,7 @@ async.series({
   },
   // PNG
   png: function (callback) {
-    const inputPngBuffer = fs.readFileSync(fixtures.inputPng);
+    const inputPngBuffer = fs.readFileSync(fixtures.inputPngBench);
     const pngSuite = new Benchmark.Suite('png');
     // jimp
     pngSuite.add('jimp-buffer-buffer', {
@@ -589,7 +589,7 @@ async.series({
     }).add('jimp-file-file', {
       defer: true,
       fn: function (deferred) {
-        jimp.read(fixtures.inputPng, function (err, image) {
+        jimp.read(fixtures.inputPngBench, function (err, image) {
           if (err) {
             throw err;
           } else {
@@ -610,7 +610,7 @@ async.series({
     pngSuite.add('mapnik-file-file', {
       defer: true,
       fn: function (deferred) {
-        mapnik.Image.open(fixtures.inputPng, function (err, img) {
+        mapnik.Image.open(fixtures.inputPngBench, function (err, img) {
           if (err) throw err;
           img.premultiply(function (err, img) {
             if (err) throw err;
@@ -657,7 +657,7 @@ async.series({
       defer: true,
       fn: function (deferred) {
         imagemagick.resize({
-          srcPath: fixtures.inputPng,
+          srcPath: fixtures.inputPngBench,
           dstPath: fixtures.outputPng,
           width: width,
           height: height,
@@ -675,7 +675,7 @@ async.series({
     pngSuite.add('gm-file-file', {
       defer: true,
       fn: function (deferred) {
-        gm(fixtures.inputPng)
+        gm(fixtures.inputPngBench)
           .filter('Lanczos')
           .resize(width, height)
           .write(fixtures.outputPng, function (err) {
@@ -689,7 +689,7 @@ async.series({
     }).add('gm-file-buffer', {
       defer: true,
       fn: function (deferred) {
-        gm(fixtures.inputPng)
+        gm(fixtures.inputPngBench)
           .filter('Lanczos')
           .resize(width, height)
           .toBuffer(function (err, buffer) {
@@ -708,6 +708,7 @@ async.series({
       fn: function (deferred) {
         sharp(inputPngBuffer)
           .resize(width, height)
+          .png({ compressionLevel: 6 })
           .toFile(fixtures.outputPng, function (err) {
             if (err) {
               throw err;
@@ -721,6 +722,7 @@ async.series({
       fn: function (deferred) {
         sharp(inputPngBuffer)
           .resize(width, height)
+          .png({ compressionLevel: 6 })
           .toBuffer(function (err, buffer) {
             if (err) {
               throw err;
@@ -733,8 +735,9 @@ async.series({
     }).add('sharp-file-file', {
       defer: true,
       fn: function (deferred) {
-        sharp(fixtures.inputPng)
+        sharp(fixtures.inputPngBench)
           .resize(width, height)
+          .png({ compressionLevel: 6 })
           .toFile(fixtures.outputPng, function (err) {
             if (err) {
               throw err;
@@ -746,8 +749,9 @@ async.series({
     }).add('sharp-file-buffer', {
       defer: true,
       fn: function (deferred) {
-        sharp(fixtures.inputPng)
+        sharp(fixtures.inputPngBench)
           .resize(width, height)
+          .png({ compressionLevel: 6 })
           .toBuffer(function (err, buffer) {
             if (err) {
               throw err;
@@ -762,7 +766,10 @@ async.series({
       fn: function (deferred) {
         sharp(inputPngBuffer)
           .resize(width, height)
-          .png({ progressive: true })
+          .png({
+            compressionLevel: 6,
+            progressive: true
+          })
           .toBuffer(function (err, buffer) {
             if (err) {
               throw err;
@@ -777,7 +784,10 @@ async.series({
       fn: function (deferred) {
         sharp(inputPngBuffer)
           .resize(width, height)
-          .png({ adaptiveFiltering: true })
+          .png({
+            compressionLevel: 6,
+            adaptiveFiltering: true
+          })
           .toBuffer(function (err, buffer) {
             if (err) {
               throw err;
