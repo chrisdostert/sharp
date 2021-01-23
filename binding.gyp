@@ -141,9 +141,7 @@
               'library_dirs': ['<(sharp_vendor_dir)/lib'],
               'libraries': [
                 'libvips-cpp.42.dylib',
-                'libvips.42.dylib',
-                'libglib-2.0.0.dylib',
-                'libgobject-2.0.0.dylib'
+                'libvips.42.dylib'
               ]
             },
             'xcode_settings': {
@@ -161,11 +159,7 @@
               'library_dirs': ['<(sharp_vendor_dir)/lib'],
               'libraries': [
                 '-l:libvips-cpp.so.42',
-                '-l:libvips.so.42',
-                '-l:libglib-2.0.so',
-                '-l:libgobject-2.0.so',
-                # Dependencies of dependencies, included for openSUSE support
-                '-l:libgio-2.0.so'
+                '-l:libvips.so.42'
               ],
               'ldflags': [
                 # Ensure runtime linking is relative to sharp.node
