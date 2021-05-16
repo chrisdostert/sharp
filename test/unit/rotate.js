@@ -32,7 +32,7 @@ describe('Rotation', function () {
         if (err) throw err;
         assert.strictEqual('png', info.format);
         assert.strictEqual(408, info.width);
-        assert.strictEqual(386, info.height);
+        assert.strictEqual(387, info.height);
         fixtures.assertSimilar(fixtures.expected('rotate-transparent-bg.png'), data, done);
       });
   });
@@ -45,7 +45,7 @@ describe('Rotation', function () {
         if (err) throw err;
         assert.strictEqual('jpeg', info.format);
         assert.strictEqual(408, info.width);
-        assert.strictEqual(386, info.height);
+        assert.strictEqual(387, info.height);
         fixtures.assertSimilar(fixtures.expected('rotate-solid-bg.jpg'), data, done);
       });
   });
@@ -246,7 +246,7 @@ describe('Rotation', function () {
       assert.strictEqual(true, data.length > 0);
       assert.strictEqual('jpeg', info.format);
       assert.strictEqual(320, info.width);
-      assert.strictEqual(261, info.height);
+      assert.strictEqual(262, info.height);
       done();
     });
   });
@@ -281,7 +281,7 @@ describe('Rotation', function () {
         if (err) throw err;
         assert.strictEqual('jpeg', info.format);
         assert.strictEqual(320, info.width);
-        assert.strictEqual(261, info.height);
+        assert.strictEqual(262, info.height);
         sharp(data).metadata(function (err, metadata) {
           if (err) throw err;
           assert.strictEqual(1, metadata.orientation);
@@ -299,7 +299,7 @@ describe('Rotation', function () {
         if (err) throw err;
         assert.strictEqual('jpeg', info.format);
         assert.strictEqual(320, info.width);
-        assert.strictEqual(261, info.height);
+        assert.strictEqual(262, info.height);
         sharp(data).metadata(function (err, metadata) {
           if (err) throw err;
           assert.strictEqual(1, metadata.orientation);
@@ -316,7 +316,7 @@ describe('Rotation', function () {
         if (err) throw err;
         assert.strictEqual('jpeg', info.format);
         assert.strictEqual(320, info.width);
-        assert.strictEqual(261, info.height);
+        assert.strictEqual(262, info.height);
         fixtures.assertSimilar(fixtures.expected('flip-and-flop.jpg'), data, done);
       });
   });
@@ -330,7 +330,7 @@ describe('Rotation', function () {
         if (err) throw err;
         assert.strictEqual('jpeg', info.format);
         assert.strictEqual(320, info.width);
-        assert.strictEqual(261, info.height);
+        assert.strictEqual(262, info.height);
         fixtures.assertSimilar(fixtures.inputJpg, data, done);
       });
   });

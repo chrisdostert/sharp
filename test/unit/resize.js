@@ -23,7 +23,7 @@ describe('Resize dimensions', function () {
       assert.strictEqual(true, data.length > 0);
       assert.strictEqual('jpeg', info.format);
       assert.strictEqual(320, info.width);
-      assert.strictEqual(261, info.height);
+      assert.strictEqual(262, info.height);
       done();
     });
   });
@@ -225,7 +225,7 @@ describe('Resize dimensions', function () {
         assert.strictEqual(true, data.length > 0);
         assert.strictEqual('jpeg', info.format);
         assert.strictEqual(320, info.width);
-        assert.strictEqual(261, info.height);
+        assert.strictEqual(262, info.height);
         done();
       });
   });
@@ -254,7 +254,7 @@ describe('Resize dimensions', function () {
         assert.strictEqual(true, data.length > 0);
         assert.strictEqual('jpeg', info.format);
         assert.strictEqual(320, info.width);
-        assert.strictEqual(261, info.height);
+        assert.strictEqual(262, info.height);
         done();
       });
   });
@@ -270,7 +270,7 @@ describe('Resize dimensions', function () {
         assert.strictEqual(true, data.length > 0);
         assert.strictEqual('jpeg', info.format);
         assert.strictEqual(320, info.width);
-        assert.strictEqual(261, info.height);
+        assert.strictEqual(262, info.height);
         done();
       });
   });
