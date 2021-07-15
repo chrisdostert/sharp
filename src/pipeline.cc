@@ -240,26 +240,15 @@ class PipelineWorker : public Napi::AsyncWorker {
       }
 
       // Any pre-shrinking may already have been done.
-      inputWidth = image.width();
-      inputHeight = image.height();
+      int thumbWidth = image.width();
+      int thumbHeight = image.height();
 
       // After pre-shrink, but before the main shrink stage.
-      pageHeight = sharp::GetPageHeight(image);
+      int preshrunkPageHeight = sharp::GetPageHeight(image);
 
-      // Shrink to pageHeight, so we work for multi-page images.
-      std::tie(hshrink, vshrink) = sharp::ResolveShrink(
-              inputWidth, pageHeight, targetResizeWidth, targetResizeHeight,
-              baton->canvas, swap, baton->withoutEnlargement);
-
-      // Ensure shortest edge is at least 1 pixel
-      if (hshrink > inputWidth) {
-        hshrink = 1.0;
-        baton->width = 1;
-      }
-      if (vshrink > pageHeight) {
-        vshrink = 1.0;
-        baton->height = 1;
-      }
+      // Update shrink factors after pre-shrink.
+      hshrink = static_cast<double>(thumbWidth) / (static_cast<double>(inputWidth) / hshrink);
+      vshrink = static_cast<double>(preshrunkPageHeight) / (static_cast<double>(pageHeight) / vshrink);
 
       int nPages = baton->input->pages;
       if (nPages == -1) {
@@ -268,14 +257,14 @@ class PipelineWorker : public Napi::AsyncWorker {
         nPages = image.get_typeof(VIPS_META_N_PAGES) != 0 ? image.get_int(VIPS_META_N_PAGES) : 1;
       }
 
-      int targetHeight = static_cast<int>(std::rint(static_cast<double>(pageHeight) / vshrink));
+      int targetHeight = static_cast<int>(std::rint(static_cast<double>(preshrunkPageHeight) / vshrink));
       int targetPageHeight = targetHeight;
 
       // In toilet-roll mode, we must adjust vshrink so that we exactly hit
-      // pageHeight or we'll have pixels straddling pixel boundaries.
-      if (inputHeight > pageHeight) {
+      // preshrunkPageHeight or we'll have pixels straddling pixel boundaries.
+      if (thumbHeight > preshrunkPageHeight) {
         targetHeight *= nPages;
-        vshrink = static_cast<double>(inputHeight) / targetHeight;
+        vshrink = static_cast<double>(thumbHeight) / targetHeight;
       }
 
       // Only set page-height if we have more than one page, or this could
